@@ -4,6 +4,7 @@ import { CpuGraph } from './components/CpuGraph';
 import { MemoryGraph } from './components/MemoryGraph';
 import { ProcessTable } from './components/ProcessTable';
 import { StatusBar } from './components/StatusBar';
+import { EnvironmentPanel } from './components/EnvironmentPanel';
 import { useSystemMetrics } from './hooks/useSystemMetrics';
 import './App.css';
 
@@ -67,6 +68,8 @@ function App() {
         </div>
         <ProcessTable processes={metrics.processes} filter={filter} />
       </div>
+
+      <EnvironmentPanel filter={filter} />
 
       <StatusBar
         filter={filter}
