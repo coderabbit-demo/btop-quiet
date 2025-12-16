@@ -565,6 +565,112 @@ body {
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
 }
 
+/* Environment Panel */
+.env-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.env-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.env-title {
+  color: var(--color-purple);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.env-count {
+  color: var(--color-text-dim);
+  font-size: 10px;
+}
+
+.env-loading {
+  color: var(--color-text-dim);
+  text-align: center;
+  padding: 20px;
+}
+
+.env-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.env-row {
+  display: flex;
+  gap: 12px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-size: 11px;
+  transition: background 0.15s;
+}
+
+.env-row:hover {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.env-name {
+  color: var(--color-cyan);
+  font-weight: 600;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+.env-value {
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.env-toggle {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--color-purple);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.env-toggle:hover {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: var(--color-purple);
+}
+
+.env-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.env-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.env-list::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
   .metrics-panel {

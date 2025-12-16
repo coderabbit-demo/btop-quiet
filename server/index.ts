@@ -287,6 +287,20 @@ const server = Bun.serve({
       });
     }
 
+    if (url.pathname === "/api/environment") {
+      // Return environment variables for system diagnostics
+      const envVars = Object.entries(process.env).map(([key, value]) => ({
+        name: key,
+        value: value || "",
+      }));
+      return new Response(JSON.stringify({ variables: envVars }), {
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      });
+    }
+
     return new Response("Not Found", { status: 404, headers: corsHeaders });
   },
 });
