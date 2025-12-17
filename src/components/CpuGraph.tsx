@@ -93,7 +93,7 @@ export function CpuGraph({ cpuUsage }: CpuGraphProps) {
             {cpuUsage.map((cpu, i) => (
               <Area
                 key={cpu.core}
-                type="monotone"
+                type="linear"
                 dataKey={`cpu${cpu.core}`}
                 stroke={COLORS[i % COLORS.length]}
                 fill={`url(#cpuGradient${cpu.core})`}

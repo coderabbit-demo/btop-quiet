@@ -88,7 +88,7 @@ export function MemoryGraph({ used, total, percent }: MemoryGraphProps) {
               formatter={(value: number) => [`${value.toFixed(1)}%`, 'Usage']}
             />
             <Area
-              type="monotone"
+              type="linear"
               dataKey="percent"
               stroke={color}
               fill="url(#memGradient)"
