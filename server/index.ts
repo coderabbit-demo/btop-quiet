@@ -288,11 +288,32 @@ const server = Bun.serve({
     }
 
     if (url.pathname === "/api/environment") {
-      // Return environment variables for system diagnostics
-      const envVars = Object.entries(process.env).map(([key, value]) => ({
-        name: key,
-        value: value || "",
-      }));
+      // Return filtered environment variables for system diagnostics
+      // Only expose safe, non-sensitive variables
+
+      const safeVariables = [
+        "PATH", "HOME", "USER", "SHELL", "TERM", "LANG", "LC_ALL",
+        "EDITOR", "VISUAL", "PAGER", "TZ", "PWD", "OLDPWD",
+        "HOSTNAME", "LOGNAME", "XDG_CONFIG_HOME", "XDG_DATA_HOME",
+        "NODE_ENV", "RUST_BACKTRACE", "PYTHONDONTWRITEBYTECODE",
+      ];
+
+      const sensitivePatterns = [
+        "KEY", "SECRET", "TOKEN", "PASSWORD", "CREDENTIAL",
+        "AUTH", "PRIVATE", "API_KEY", "ACCESS_KEY",
+      ];
+
+      const isSensitive = (name: string): boolean => {
+        return sensitivePatterns.some(pattern => name.includes(pattern));
+      };
+
+      const envVars = Object.entries(process.env)
+        .filter(([key]) => safeVariables.includes(key) || key.startsWith("LC_") || key.startsWith("XDG_"))
+        .map(([key, value]) => ({
+          name: key,
+          value: isSensitive(key) ? "[REDACTED]" : (value || ""),
+        }));
+
       return new Response(JSON.stringify({ variables: envVars }), {
         headers: {
           "Content-Type": "application/json",
